@@ -8,8 +8,8 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
+      crossorigin="anonymous"/>
+      <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Dancing+Script&family=Raleway:wght@300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
     <title>Weather App</title>
@@ -27,13 +27,12 @@
           </div>
           <div class="row">
             <div class="col-6">
-              <div class="clearfix weather-temperature">
-                <img src="https://ssl.gstatic.com/onebox/weather/64/rain.png" alt="Rainy" id="icon" class="float-left" />
-                <div class="float-left">
-                  <strong id="temperature">11</strong><span class="units">°C│°F</span>
-                </div>
-              </div>
-            </div>
+              <div class="d-flex weather-temperature">
+  <img src="https://ssl.gstatic.com/onebox/weather/64/rain.png" alt="Clear" id="icon" />
+  <div>
+    <strong id="temperature">11</strong><span class="units">°C│°F</span>
+  </div>
+</div>
             <div class="col-6">
               <ul>
                 <li>Precipitation: <span id="precipitation">50</span>%</li>
@@ -43,7 +42,7 @@
             </div>
           </div>
         </div>
-        <small>
+          <small>
           <a
             href="https://github.com/vladagr-151107/vanilla-weather-app"
             target="_blank">Open-source code</a>

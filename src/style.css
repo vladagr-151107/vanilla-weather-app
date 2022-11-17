@@ -1,3 +1,31 @@
-body{
+.weather-app-wrapper{
     max-width: 900px;
+    max-height: 700px;
+    margin: 30px auto;
+}
+.weather-app{
+    padding: 20px;
+    border: 1px solid #24CBE5;
+    border-radius: 5px;
+    color: #082567;
+}
+body{
+    background-color:#B8DBF1;
+    font-family: 'Raleway', sans-serif;
+}
+h1{
+    font-weight: 500;
+    font-size: 45px;
+    line-height: 40px;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+    font-size: 22px;
+    margin: 0;
+    padding: 0;
+    line-height: 30px;
 }
