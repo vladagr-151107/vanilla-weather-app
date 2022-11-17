@@ -4,6 +4,9 @@
     margin: 30px auto;
 }
 .weather-app{
+    max-width: 900px;
+    max-height: 700px;
+    margin: 30px auto;
     padding: 20px;
     border: 1px solid #24CBE5;
     border-radius: 5px;
