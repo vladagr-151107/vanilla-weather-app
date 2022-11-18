@@ -24,7 +24,12 @@ function showTemperature(response) {
     let humidityElement = document.querySelector("#humidity");
     humidityElement.innerHTML = response.data.temperature.humidity;
     let dateElement = document.querySelector("#date");
-    dateElement.innerHTML = formatDate(response.data.time*1000);
+    dateElement.innerHTML = formatDate(response.data.time * 1000);
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute(
+      "src",
+        `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
+    iconElement.setAttribute("alt", response.data.condition.description);
 }
 let city = "Odesa";
 let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
