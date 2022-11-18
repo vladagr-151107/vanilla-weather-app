@@ -50,3 +50,6 @@ li{
     font-size: 20px;
     top: -30px;
 }
+#description:first-letter{
+    text-transform: capitalize;
+}
