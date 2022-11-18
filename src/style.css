@@ -32,3 +32,21 @@ li{
     padding: 0;
     line-height: 30px;
 }
+.overview{
+    margin-bottom: 20px;
+}
+.weather-temperature img{
+    margin-right: 10px;
+    float: left;
+    height: 80px;
+    width: 80px;
+}
+#temperature{
+    font-size: 70px;
+    line-height: 1;
+}
+.weather-temperature .units{
+    position: relative;
+    font-size: 20px;
+    top: -30px;
+}
