@@ -44,8 +44,8 @@ function showTemperature(response) {
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
+  celsiusTemperature = response.data.temperature.current;
 }
-celsiusTemperature = response.data.temperature.current;
 search("Odesa");
 function handleSubmit(event) {
   event.preventDefault();
