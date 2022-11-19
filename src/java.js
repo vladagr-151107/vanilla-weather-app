@@ -31,8 +31,16 @@ function showTemperature(response) {
         `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`);
     iconElement.setAttribute("alt", response.data.condition.description);
 }
-let city = "Odesa";
-let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
-let apiUrl =
-    `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-axios.get(apiUrl).then(showTemperature);
+function search(city) {
+    let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
+    let apiUrl =
+        `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(showTemperature);
+}
+function handleSubmit(event) {
+    event.preventDefault();
+    let cityInputElement = document.querySelector("#city-input");
+    search(cityInputElement.value);
+}
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
