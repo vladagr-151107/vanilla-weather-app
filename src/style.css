@@ -12,13 +12,17 @@
     border-radius: 5px;
     color: #082567;
 }
+#icon{
+   height: 100px;
+   width: 100px;
+}
 body{
     background-color:#B8DBF1;
     font-family: 'Raleway', sans-serif;
 }
 h1{
     font-weight: 500;
-    font-size: 45px;
+    font-size: 50px;
     line-height: 40px;
 }
 ul{
@@ -27,7 +31,7 @@ ul{
 }
 li{
     list-style: none;
-    font-size: 22px;
+    font-size: 24px;
     margin: 0;
     padding: 0;
     line-height: 30px;
@@ -42,7 +46,7 @@ li{
     width: 80px;
 }
 #temperature{
-    font-size: 70px;
+    font-size: 80px;
     line-height: 1;
 }
 .weather-temperature .units{
@@ -59,4 +63,17 @@ li{
 }
 .weather-temperature .active:hover{
     text-decoration: none;
+}
+.weather-forecast{
+    margin-top: 15px;
+    text-align: center;
+}
+.forecast-day{
+    font-size: 20px;
+}
+.forecast-temperatures{
+    font-size: 18px;
+}
+.forecast-temp-min{
+    opacity: 0.8;
 }
