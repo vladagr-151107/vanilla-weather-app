@@ -45,7 +45,12 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.condition.description);
   celsiusTemperature = response.data.temperature.current;
-  displayForecast();
+  displayForecast(response.data.coordinates);
+}
+function getForecast(coordinates) {
+  let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
 }
 search("Odesa");
 function handleSubmit(event) {
@@ -76,7 +81,7 @@ fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 search("Odesa");
-function displayForecast() {
+function displayForecast(response) {
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu","Fri"];
