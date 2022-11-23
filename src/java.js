@@ -51,7 +51,7 @@ function showTemperature(response) {
   );
   iconElement.setAttribute("alt", response.data.condition.description);
   celsiusTemperature = response.data.temperature.current;
-  displayForecast(response.data.coordinates);
+  getForecast(response.data.coordinates);
 }
 function getForecast(coordinates) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
