@@ -1,6 +1,7 @@
 function formatDate(timestamp) {
   let date = new Date(timestamp);
   let hours = date.getHours();
+  let currentDay = date.getDate();
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
@@ -17,14 +18,29 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
+ let months = [ "Dec", "Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
+  let month = months[date.getMonth()];
   let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes}`;
+  return `${day}, ${month} ${currentDay} ${hours}:${minutes}`;
 }
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  return days[day];
+  let currentDay = date.getDate() + 1;
+   let months = [
+     "Dec",
+     "Jan",
+     "Feb",
+     "Mar",
+     "Apr",
+     "Jun",
+     "Jul",
+     "Aug",
+     "Sep",
+     "Oct",
+     "Nov",
+   ];
+  let month = months[date.getMonth()];
+  return `${currentDay} ${month}`;
 }
 function search(city) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
