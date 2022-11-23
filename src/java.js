@@ -20,6 +20,12 @@ function formatDate(timestamp) {
   let day = days[date.getDay()];
   return `${day} ${hours}:${minutes}`;
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
 function search(city) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
@@ -82,23 +88,29 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", displayCelsiusTemperature);
 search("Odesa");
 function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu","Fri"];
-    days.forEach(function (day) {
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `
-              <div class="col-2"> 
-                <div class="forecast-day">
-                ${day} 
-                </div>
-                <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/scattered-clouds-night.png" alt="" width="80px"/>
+        `<div class="col-2"> 
+                <div class="forecast-day">${formatDay(forecastDay.time)}</div>
+                <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
+                  forecastDay.condition.icon
+                }.png" alt="" width="80"/>
                <div class="forecast-temperatures"> 
-               <span class="forecast-temp-max"> 16</span>° / <span class="forecast-temp-min">12</span>°
+               <span class="forecast-temp-max">${Math.round(
+                 forecastDay.temperature.maximum
+               )}°C</span> / 
+               <span class="forecast-temp-min">${Math.round(
+                 forecastDay.temperature.minimum
+               )}°C</span>
                 </div>
               </div>`;
+    }
     });
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
-}
+    forecastHTML = forecastHTML + `</div>`;
+    forecastElement.innerHTML = forecastHTML;
+  };
