@@ -25,7 +25,7 @@ function formatDate(timestamp) {
 }
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
-  let currentDay = date.getDate() + 1;
+  let currentDay = date.getDate();
    let months = [
      "Dec",
      "Jan",
