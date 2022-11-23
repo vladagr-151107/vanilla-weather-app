@@ -21,14 +21,15 @@
         <div class="weather-app">
           <form id="search-form" class="mb-3">
             <div class="row">
-              <div class="col-9">
+              <div class="col-2"><button type="button" class="btn btn-primary" id="current-location">Current </button></div>
+              <div class="col-8">
             <input type="search" 
             placeholder="Search for a city" 
             class="form-control"
             autocomplete="off"
             id="city-input"/>
             </div>
-         <div class="col-3">
+         <div class="col-2">
             <input type="submit" value="Search" class="btn btn-primary"/>
             </div>
          </div>
@@ -36,7 +37,7 @@
           <div class="overview">
             <h1 id="city"> Odesa </h1>
             <ul>
-              <li>Last updated:  <span id="date"></span></li>
+              <li><span id="date"></span></li>
               <li id="description"> Сlear</li>
             </ul>
           </div>
@@ -58,13 +59,13 @@
           </div>
           <div class="weather-forecast" id="forecast"> 
         </div>
-          <small>
+      </div>
+      <small>
           <a
             href="https://github.com/vladagr-151107/vanilla-weather-app"
             target="_blank">Open-source code</a>
           by <a href="https://www.instagram.com/_princesska_1511_/?igshid=YmMyMTA2M2Y%3D">Vlada Grushchenko</a>
         </small>
-      </div>
     </div>
     <script src="src/java.js"></script>
   </body>
