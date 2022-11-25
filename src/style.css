@@ -57,13 +57,6 @@ li{
 #description:first-letter{
     text-transform: capitalize;
 }
-.weather-temperature .active{
-    color: #082567;
-    cursor: default;
-}
-.weather-temperature .active:hover{
-    text-decoration: none;
-}
 .weather-forecast{
     margin-top: 15px;
     text-align: center;
