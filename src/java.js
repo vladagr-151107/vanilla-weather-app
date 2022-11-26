@@ -18,7 +18,7 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
- let months = [ "Dec", "Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov"];
+ let months = [ 0, "Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
   let month = months[date.getMonth()];
   let day = days[date.getDay()];
   return `${day}, ${month} ${currentDay} ${hours}:${minutes}`;
@@ -27,7 +27,7 @@ function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let currentDay = date.getDate();
    let months = [
-     "Dec",
+     0,
      "Jan",
      "Feb",
      "Mar",
@@ -38,6 +38,7 @@ function formatDay(timestamp) {
      "Sep",
      "Oct",
      "Nov",
+     "Dec"
    ];
   let month = months[date.getMonth()];
   return `${currentDay} ${month}`;
