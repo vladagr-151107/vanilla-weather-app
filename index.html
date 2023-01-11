@@ -8,8 +8,12 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"/>
-      <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Dancing+Script&family=Raleway:wght@300&family=Roboto+Slab:wght@300&display=swap" rel="stylesheet">
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya&family=Dancing+Script&family=Raleway:wght@300&family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
     <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
@@ -21,24 +25,34 @@
         <div class="weather-app">
           <form id="search-form" class="mb-3">
             <div class="row">
-              <div class="col-2"><button type="button" class="btn btn-primary" id="current-location">Current </button></div>
+              <div class="col-2">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="current-location"
+                >
+                  Current
+                </button>
+              </div>
               <div class="col-8">
-            <input type="search" 
-            placeholder="Search for a city" 
-            class="form-control"
-            autocomplete="off"
-            id="city-input"/>
+                <input
+                  type="search"
+                  placeholder="Search for a city"
+                  class="form-control"
+                  autocomplete="off"
+                  id="city-input"
+                />
+              </div>
+              <div class="col-2">
+                <input type="submit" value="Search" class="btn btn-primary" />
+              </div>
             </div>
-         <div class="col-2">
-            <input type="submit" value="Search" class="btn btn-primary"/>
-            </div>
-         </div>
           </form>
           <div class="overview">
-            <h1 id="city"> Odesa </h1>
+            <h1 id="city">Odesa</h1>
             <ul>
               <li><span id="date"></span></li>
-              <li id="description"> Сlear</li>
+              <li id="description">Сlear</li>
             </ul>
           </div>
           <div class="row">
@@ -46,7 +60,8 @@
               <div class="d-flex weather-temperature">
                 <img src="" alt="Clear" id="icon" />
                 <div class="float-left">
-                  <strong id="temperature"></strong><span class="units">°C</span>
+                  <strong id="temperature"></strong
+                  ><span class="units">°C</span>
                 </div>
               </div>
             </div>
@@ -57,15 +72,21 @@
               </ul>
             </div>
           </div>
-          <div class="weather-forecast" id="forecast"> 
+          <div class="weather-forecast" id="forecast"></div>
         </div>
-      </div>
-      <small>
+        <small>
           <a
             href="https://github.com/vladagr-151107/vanilla-weather-app"
-            target="_blank">Open-source code</a>
-          by <a href="https://www.instagram.com/_princesska_1511_/?igshid=YmMyMTA2M2Y%3D">Vlada Grushchenko</a>
+            target="_blank"
+            >Open-source code</a
+          >
+          by
+          <a
+            href="https://www.instagram.com/_princesska_1511_/?igshid=YmMyMTA2M2Y%3D"
+            >Vlada Grushchenko</a
+          >
         </small>
+      </div>
     </div>
     <script src="src/java.js"></script>
   </body>
