@@ -28,7 +28,6 @@ function formatDay(timestamp) {
   let currentDay = date.getDate();
    let months = [
      "Jan",
-     "Jan",
      "Feb",
      "Mar",
      "Apr",
