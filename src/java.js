@@ -18,7 +18,19 @@ function formatDate(timestamp) {
     "Friday",
     "Saturday",
   ];
- let months = [ "Jan", "Jan", "Feb", "Mar", "Apr", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov","Dec"];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   let month = months[date.getMonth()];
   let day = days[date.getDay()];
   return `${day}, ${month} ${currentDay} ${hours}:${minutes}`;
@@ -26,19 +38,19 @@ function formatDate(timestamp) {
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let currentDay = date.getDate();
-   let months = [
-     "Jan",
-     "Feb",
-     "Mar",
-     "Apr",
-     "Jun",
-     "Jul",
-     "Aug",
-     "Sep",
-     "Oct",
-     "Nov",
-     "Dec"
-   ];
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   let month = months[date.getMonth()];
   return `${currentDay} ${month}`;
 }
@@ -105,10 +117,10 @@ function displayForecast(response) {
                 </div>
               </div>`;
     }
-    });
-    forecastHTML = forecastHTML + `</div>`;
-    forecastElement.innerHTML = forecastHTML;
-};
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 function searchLocation(position) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${position.coords.longitude}&lat=${position.coords.latitude}&key=${apiKey}&units=metric`;
