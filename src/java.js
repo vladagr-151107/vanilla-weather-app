@@ -23,6 +23,7 @@ function formatDate(timestamp) {
     "Feb",
     "Mar",
     "Apr",
+    "May",
     "Jun",
     "Jul",
     "Aug",
