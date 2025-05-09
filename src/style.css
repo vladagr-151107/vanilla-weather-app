@@ -70,3 +70,13 @@ li{
 .forecast-temp-min{
     opacity: 0.8;
 }
+.units a{
+    color:#2458d1;
+    text-decoration: none;
+    margin: 0 5px;
+}
+.units a.active{
+    font-weight: bold;
+    color: #082567;
+    text-decoration: none;
+}

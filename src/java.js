@@ -1,14 +1,17 @@
-function formatDate(timestamp) {
-  let date = new Date(timestamp);
-  let hours = date.getHours();
-  let currentDay = date.getDate();
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
+let currentCity = "Odesa";
+let celsiusTemperature = null;
+let forecastData = null;
+function updateCurrentTime() {
+  let now = new Date();
+  let hours = now.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
   }
+  let minutes = now.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  let currentDay = now.getDate();
   let days = [
     "Sunday",
     "Monday",
@@ -32,10 +35,17 @@ function formatDate(timestamp) {
     "Nov",
     "Dec",
   ];
-  let month = months[date.getMonth()];
-  let day = days[date.getDay()];
-  return `${day}, ${month} ${currentDay} ${hours}:${minutes}`;
+
+  let month = months[now.getMonth()];
+  let day = days[now.getDay()];
+
+  let dateElement = document.querySelector("#date");
+  if (dateElement) {
+    dateElement.innerHTML = `${day}, ${month} ${currentDay} ${hours}:${minutes}`;
+  }
 }
+setInterval(updateCurrentTime, 1000);
+updateCurrentTime();
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let currentDay = date.getDate();
@@ -44,6 +54,7 @@ function formatDay(timestamp) {
     "Feb",
     "Mar",
     "Apr",
+    "May",
     "Jun",
     "Jul",
     "Aug",
@@ -55,12 +66,15 @@ function formatDay(timestamp) {
   let month = months[date.getMonth()];
   return `${currentDay} ${month}`;
 }
+
 function search(city) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showTemperature);
 }
+
 function showTemperature(response) {
+  celsiusTemperature = response.data.temperature.current;
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(response.data.temperature.current);
   let cityElement = document.querySelector("#city");
@@ -71,30 +85,41 @@ function showTemperature(response) {
   windElement.innerHTML = Math.round(response.data.wind.speed);
   let humidityElement = document.querySelector("#humidity");
   humidityElement.innerHTML = response.data.temperature.humidity;
-  let dateElement = document.querySelector("#date");
-  dateElement.innerHTML = formatDate(response.data.time * 1000);
+
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     `http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${response.data.condition.icon}.png`
   );
   iconElement.setAttribute("alt", response.data.condition.description);
+
   celsiusTemperature = response.data.temperature.current;
+
   getForecast(response.data.coordinates);
 }
+function displayFahrenheitTemperature(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  let fahrenheitTemperature = (celsiusTemperature * 9)/ 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+  document.querySelector("#celsius-link").classList.remove("active");
+  document.querySelector("fahrenheit-link").classList.add("active");
+}
+function displayCelsiusTemperature(event){
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+  document.querySelector("#fahrenheit-link").classList.remove("active");
+  document.querySelector("#celsius-link").classList.add("active");
+}
+
 function getForecast(coordinates) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
-search("Odesa");
-function handleSubmit(event) {
-  event.preventDefault();
-  let cityInputElement = document.querySelector("#city-input");
-  search(cityInputElement.value);
-}
-let form = document.querySelector("#search-form");
-form.addEventListener("submit", handleSubmit);
 function displayForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -122,6 +147,14 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInputElement = document.querySelector("#city-input");
+  currentCity = cityInputElement.value;
+  search(currentCity);
+
+}
+
 function searchLocation(position) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${position.coords.longitude}&lat=${position.coords.latitude}&key=${apiKey}&units=metric`;
@@ -131,5 +164,13 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(searchLocation);
 }
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", handleSubmit);
+
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+search("Odesa");
+setInterval(function(){
+  search(currentCity);
+}, 60000);		
