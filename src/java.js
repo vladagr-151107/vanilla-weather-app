@@ -97,6 +97,35 @@ function showTemperature(response) {
 
   getForecast(response.data.coordinates);
 }
+function convertForecastToFahrenheit(){
+  let maxTemps = document.querySelectorAll(".forecast-temp-max");
+  let minTemps = document.querySelectorAll(".forecast-temp-min");
+  maxTemps.forEach(function (span) {
+    let celsius = parseFloat(span.getAttribute("data-celsius"));
+    let fahrenheit = (celsius * 9) / 5 + 32;
+    span.innerHTML = `${Math.round(fahrenheit)}°F`;
+  });
+
+  minTemps.forEach(function (span) {
+    let celsius = parseFloat(span.getAttribute("data-celsius"));
+    let fahrenheit = (celsius * 9) / 5 + 32;
+    span.innerHTML = `${Math.round(fahrenheit)}°F`;
+  });
+}
+function convertForecastToCelsius(){
+  let maxTemps = document.querySelectorAll(".forecast-temp-max");
+  let minTemps = document.querySelectorAll(".forecast-temp-min");
+
+  maxTemps.forEach(function (span) {
+    let celsius = parseFloat(span.getAttribute("data-celsius"));
+    span.innerHTML = `${Math.round(celsius)}°C`;
+  });
+
+  minTemps.forEach(function (span) {
+    let celsius = parseFloat(span.getAttribute("data-celsius"));
+    span.innerHTML = `${Math.round(celsius)}°C`;
+  });
+}
 function displayFahrenheitTemperature(event){
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
@@ -104,7 +133,7 @@ function displayFahrenheitTemperature(event){
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 
   document.querySelector("#celsius-link").classList.remove("active");
-  document.querySelector("fahrenheit-link").classList.add("active");
+  document.querySelector("#fahrenheit-link").classList.add("active");
 }
 function displayCelsiusTemperature(event){
   event.preventDefault();
@@ -168,6 +197,11 @@ function getCurrentLocation(event) {
 let form = document.querySelector("#search-form");
 form.addEventListener("submit", handleSubmit);
 
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", displayCelsiusTemperature);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 search("Odesa");
