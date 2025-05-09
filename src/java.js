@@ -132,13 +132,18 @@ function displayFahrenheitTemperature(event){
   let fahrenheitTemperature = (celsiusTemperature * 9)/ 5 + 32;
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 
+  displayForecast("imperial");
+
   document.querySelector("#celsius-link").classList.remove("active");
   document.querySelector("#fahrenheit-link").classList.add("active");
 }
+
 function displayCelsiusTemperature(event){
   event.preventDefault();
   let temperatureElement = document.querySelector("#temperature");
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
+
+  displayForecast("metric");
 
   document.querySelector("#fahrenheit-link").classList.remove("active");
   document.querySelector("#celsius-link").classList.add("active");
@@ -147,14 +152,23 @@ function displayCelsiusTemperature(event){
 function getForecast(coordinates) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.longitude}&lat=${coordinates.latitude}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(function(response){
+    forecastData = response.data.daily;
+    displayForecast();
+  });
 }
-function displayForecast(response) {
-  let forecast = response.data.daily;
+function displayForecast(units = "metric") {
+  let forecast = forecastData;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     if (index < 6) {
+      let maxTemp = forecastDay.temperature.maximum;
+      let minTemp = forecastDay.temperature.minimum;
+      if(units === "imperial"){
+        maxTemp = (maxTemp * 9) / 5 + 32;
+        minTemp = (minTemp * 9) / 5 + 32;
+      }
       forecastHTML =
         forecastHTML +
         `<div class="col-2"> 
@@ -164,11 +178,11 @@ function displayForecast(response) {
                 }.png" alt="" width="80"/>
                <div class="forecast-temperatures"> 
                <span class="forecast-temp-max">${Math.round(
-                 forecastDay.temperature.maximum
-               )}°C</span> / 
+                 maxTemp
+               )}${units === "imperial" ? " °F" : " °C"}</span> / 
                <span class="forecast-temp-min">${Math.round(
-                 forecastDay.temperature.minimum
-               )}°C</span>
+                 minTemp
+               )}${units === "imperial" ? " °F" : " °C"}</span>
                 </div>
               </div>`;
     }
