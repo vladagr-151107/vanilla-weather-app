@@ -80,3 +80,33 @@ li{
     color: #082567;
     text-decoration: none;
 }
+.search-history{
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #082567;
+    width: 100%;
+    max-width: 300px;
+    z-index: 999;
+    top: 100%;
+    left: 0;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+.search-history ul{
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+.search-history li{
+    padding: 5px 0;
+}
+.search-history a{
+    text-decoration: none;
+    color:#082567;
+    cursor: pointer;
+}
+.search-history a:hover{
+    text-decoration: underline;
+}

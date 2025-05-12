@@ -94,7 +94,8 @@ function showTemperature(response) {
   iconElement.setAttribute("alt", response.data.condition.description);
 
   celsiusTemperature = response.data.temperature.current;
-
+  currentCity = response.data.city;
+  saveToHistory(currentCity);
   getForecast(response.data.coordinates);
 }
 function convertForecastToFahrenheit(){
@@ -195,7 +196,7 @@ function handleSubmit(event) {
   let cityInputElement = document.querySelector("#city-input");
   currentCity = cityInputElement.value;
   search(currentCity);
-
+  cityInputElement.value = "";
 }
 
 function searchLocation(position) {
@@ -221,4 +222,48 @@ currentLocationButton.addEventListener("click", getCurrentLocation);
 search("Odesa");
 setInterval(function(){
   search(currentCity);
-}, 60000);		
+}, 60000);
+function saveToHistory(city){
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  history = history.filter(item => item !==city);
+  history.unshift(city);
+  if(history.length > 5){
+    history.pop();
+  }
+  localStorage.setItem("searchHistory", JSON.stringify(history));
+  displayHistory();
+}
+function displayHistory() {
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  let historyElement = document.querySelector("#search-history");
+
+  if (history.length === 0) {
+    historyElement.innerHTML = "";
+    return;
+  }
+
+  let html = "<h5>Search History:</h5><ul>";
+
+  history.forEach(function(city) {
+    html += `<li><a href="#" onclick="search('${city}')">${city}</a></li>`;
+  });
+
+  html += "</ul>";
+
+  historyElement.innerHTML = html;
+}
+let cityInputElement = document.querySelector("#city-input");
+
+cityInputElement.addEventListener("focus", function(){
+  displayHistory();
+  document.querySelector("#search-history").style.display = "block";
+});
+cityInputElement.addEventListener("input", function(){
+  displayHistory();
+   document.querySelector("#search-history").style.display = "block";
+});
+document.addEventListener("click", function(event){
+  if(!event.target.closest("#city-input") && !event.target.closest("#search-history")){
+    document.querySelector("#search-history").style.display = "none";
+  }
+})
