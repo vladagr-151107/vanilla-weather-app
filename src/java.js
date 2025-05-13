@@ -245,12 +245,21 @@ function displayHistory() {
   let html = "";
 
   history.forEach(function(city) {
-    html += `<div class="history-item" onclick="search('$city')">${city}</div>`;
+    html += `<div class="history-item" onclick="search('${city}')">${city}</div>`;
   });
 
   html += "</ul>";
 
   historyElement.innerHTML = html;
+
+  document.querySelectorAll(".history-link").forEach(function(link){
+    link.addEventListener("click", function(event){
+      event.preventDefault();
+      let city = this.getAttribute("data-city");
+      searchCity(city);
+      document.querySelector("#search-history").style.display = "none";
+    })
+  })
 }
 let cityInputElement = document.querySelector("#city-input");
 
