@@ -225,3 +225,7 @@ li{
     color:#082567;
     text-align: left;
 }
+.history-item{
+    cursor: pointer;
+    padding: 5px;
+}

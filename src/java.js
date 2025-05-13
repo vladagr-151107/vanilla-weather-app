@@ -195,8 +195,12 @@ function handleSubmit(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#city-input");
   currentCity = cityInputElement.value;
-  search(currentCity);
-  cityInputElement.value = "";
+  if(currentCity !== ""){
+    localStorage.setItem("lastCity", currentCity);
+    saveToHistory(currentCity);
+    search(currentCity);
+    cityInputElement.value = "";
+  }
 }
 
 function searchLocation(position) {
@@ -219,13 +223,15 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", displayFahrenheitTemperature);
 let currentLocationButton = document.querySelector("#current-location");
 currentLocationButton.addEventListener("click", getCurrentLocation);
-search("Odesa");
 setInterval(function(){
   search(currentCity);
 }, 60000);
 function saveToHistory(city){
+  city = city.trim();
+  if(!city) return;
+
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  history = history.filter(item => item !==city);
+  history = history.filter(item => item.toLowerCase() !==city.toLowerCase());
   history.unshift(city);
   if(history.length > 5){
     history.pop();
@@ -245,18 +251,20 @@ function displayHistory() {
   let html = "";
 
   history.forEach(function(city) {
-    html += `<div class="history-item" onclick="search('${city}')">${city}</div>`;
+    html += `<div class="history-item" data-city="${city}">${city}</div>`;
   });
 
   html += "</ul>";
 
   historyElement.innerHTML = html;
 
-  document.querySelectorAll(".history-link").forEach(function(link){
+  document.querySelectorAll(".history-item").forEach(function(link){
     link.addEventListener("click", function(event){
       event.preventDefault();
       let city = this.getAttribute("data-city");
-      searchCity(city);
+      localStorage.setItem("lastCity", city);
+      saveToHistory(city);
+      search(city);
       document.querySelector("#search-history").style.display = "none";
     })
   })
@@ -276,3 +284,12 @@ document.addEventListener("click", function(event){
     document.querySelector("#search-history").style.display = "none";
   }
 })
+let savedCity = localStorage.getItem("lastCity");
+console.log(savedCity);
+if (savedCity && savedCity.trim() !== "") {
+  currentCity = savedCity;
+  search(savedCity);
+} else {
+  currentCity = "Odesa";
+  search("Odesa");
+}
