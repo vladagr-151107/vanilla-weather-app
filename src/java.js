@@ -172,7 +172,7 @@ function displayForecast(units = "metric") {
       }
       forecastHTML =
         forecastHTML +
-        `<div class="col-2"> 
+        `<div class="col-lg-2 col-4"> 
                 <div class="forecast-day">${formatDay(forecastDay.time)}</div>
                 <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
                   forecastDay.condition.icon
