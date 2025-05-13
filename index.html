@@ -34,7 +34,7 @@
                   Current
                 </button>
               </div>
-              <div class="col-8">
+              <div class="col-8 position-relative" style="position: relative;">
                 <input
                   type="search"
                   placeholder="Search for a city"
@@ -42,13 +42,13 @@
                   autocomplete="off"
                   id="city-input"
                 />
+                <div id="search-history" class="search-history"></div>
               </div>
               <div class="col-2">
                 <input type="submit" value="Search" class="btn btn-primary" />
               </div>
             </div>
           </form>
-          <div id="search-history" style="display: none;"></div>
           <div class="overview">
             <h1 id="city">Odesa</h1>
             <ul>

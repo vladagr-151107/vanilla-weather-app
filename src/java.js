@@ -242,10 +242,10 @@ function displayHistory() {
     return;
   }
 
-  let html = "<h5>Search History:</h5><ul>";
+  let html = "";
 
   history.forEach(function(city) {
-    html += `<li><a href="#" onclick="search('${city}')">${city}</a></li>`;
+    html += `<div class="history-item" onclick="search('$city')">${city}</div>`;
   });
 
   html += "</ul>";
