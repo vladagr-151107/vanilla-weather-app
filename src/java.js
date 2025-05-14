@@ -206,7 +206,12 @@ function handleSubmit(event) {
 function searchLocation(position) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${position.coords.longitude}&lat=${position.coords.latitude}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showTemperature);
+  axios.get(apiUrl).then(function(response){
+    let cityName = response.data.city;
+    localStorage.setItem("lastCity", cityName);
+    saveToHistory(cityName);
+    showTemperature(response);
+  });
 }
 function getCurrentLocation(event) {
   event.preventDefault();
@@ -293,3 +298,23 @@ if (savedCity && savedCity.trim() !== "") {
   currentCity = "Odesa";
   search("Odesa");
 }
+document.addEventListener("DOMContentLoaded", function(){
+  const toggleBtn = document.querySelector("#toggle-theme");
+function applyTheme(theme){
+  if(theme === "dark"){
+    document.body.classList.add("dark-mode");
+    toggleBtn.innerText = "Light mode";
+  } else{
+    document.body.classList.remove("dark-mode");
+    toggleBtn.innerText = "Dark mode";
+  }
+}
+  let savedTheme = localStorage.getItem("theme") || "light";
+  applyTheme(savedTheme);
+  toggleBtn.addEventListener("click", function(){
+    let currentTheme = document.body.classList.contains("dark-mode") ? "dark" : "light";
+    let newTheme = currentTheme === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", newTheme);
+    applyTheme(newTheme);
+  })
+});
