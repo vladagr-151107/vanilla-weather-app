@@ -290,3 +290,9 @@ body.dark-mode a {
 body.dark-mode a:hover {
   color: #fff;
 }
+.buttons-group{
+  display:flex;
+  justify-content: flex-end;
+  gap:10px;
+  margin-bottom: 15px;
+}

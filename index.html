@@ -22,9 +22,11 @@
   <body>
     <div class="container">
       <div class="weather-app-wrapper">
-        <div class="theme-toggle">
+        <div class="buttons-group">
           <button id="toggle-theme" class="btn btn-outline-secondary">Dark Mode</button>
+          <button id="clear-history" class="btn btn-outline-secondary">Clean the history</button>
         </div>
+        <div id="error-message" style="color: red; display:none; font-size: 14px; margin-top: 5px;">We couldn't download the weather. Try again later.</div>
         <div class="weather-app">
           <form id="search-form" class="mb-3">
             <div class="row">

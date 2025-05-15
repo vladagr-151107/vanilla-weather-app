@@ -70,7 +70,18 @@ function formatDay(timestamp) {
 function search(city) {
   let apiKey = "e43d0522c6a2b491f8bte6b227o4172b";
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showTemperature);
+  axios.get(apiUrl).then(response => {
+    hideError();
+    showTemperature(response);
+  })
+  .catch(error => {
+    console.error(error);
+    if(error.response && error.response.status === 429){
+      showError("Too many requests. Please, wait.");
+    } else{
+      showError("We couldn't download the weather. Try again.");
+    }
+  });
 }
 
 function showTemperature(response) {
@@ -248,10 +259,11 @@ function displayHistory() {
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
   let historyElement = document.querySelector("#search-history");
 
-  if (history.length === 0) {
-    historyElement.innerHTML = "";
-    return;
-  }
+ if(history.length === 0){
+  historyElement.innerHTML = "";
+  document.querySelector("#clear-history").style.display = "none";
+  return;
+}
 
   let html = "";
 
@@ -262,6 +274,7 @@ function displayHistory() {
   html += "</ul>";
 
   historyElement.innerHTML = html;
+  document.querySelector("#clear-history").style.display = "block";
 
   document.querySelectorAll(".history-item").forEach(function(link){
     link.addEventListener("click", function(event){
@@ -271,8 +284,8 @@ function displayHistory() {
       saveToHistory(city);
       search(city);
       document.querySelector("#search-history").style.display = "none";
-    })
-  })
+    });
+  });
 }
 let cityInputElement = document.querySelector("#city-input");
 
@@ -318,3 +331,20 @@ function applyTheme(theme){
     applyTheme(newTheme);
   })
 });
+let clearButton = document.querySelector("#clear-history");
+if(clearButton){
+  clearButton.addEventListener("click", function(){
+    localStorage.removeItem("searchHistory");
+    displayHistory();
+    document.querySelector("#search-history").style.display = "none";
+  });
+}
+function showError(message){
+  const errorElement = document.querySelector("#error-message");
+  errorElement.innerText = message;
+  errorElement.style.display = "block";
+}
+function hideError(){
+  const errorElement = document.querySelector("#error-message");
+  errorElement.style.display = "none"
+}
