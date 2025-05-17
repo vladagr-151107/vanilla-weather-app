@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alegreya&family=Dancing+Script&family=Raleway:wght@300&family=Roboto+Slab:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='src/style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="weather-app-wrapper">
+        <div class="weather-app">
+          <h1 class="text-center">Sign up</h1>
+
+          {% if error %}
+           <div class="text-center" style="color: #ff4c4c; font-size: 15px; font-weight: bold; margin-top: 20px; margin-bottom: 15px;"> {{ error }} </div>
+          {% endif %}
+
+          <form action="/register" method="POST">
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input type="text" name="username" class="form-control" required />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" name="password" class="form-control" required />
+            </div>
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary">Sign up</button>
+              <a href="/login" class="btn btn-outline-secondary ml-2">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const theme = localStorage.getItem("theme");
+        if (theme === "dark") {
+          document.body.classList.add("dark-mode");
+        }
+      });
+    </script>
+  </body>
+</html>
