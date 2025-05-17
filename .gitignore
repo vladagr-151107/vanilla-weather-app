@@ -1,2 +1,2 @@
 .env
-users.db
+instance/users.db
