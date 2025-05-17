@@ -296,3 +296,19 @@ body.dark-mode a:hover {
   gap:10px;
   margin-bottom: 15px;
 }
+body:not(.dark-mode) .footer {
+  color: #082567;
+}
+
+body:not(.dark-mode) .footer a {
+  color: #082567;
+  text-decoration: none;
+}
+
+body:not(.dark-mode) .footer a:hover {
+  color: #000;
+  text-decoration: underline;
+}
+.footer small {
+  font-size: 14px;
+}

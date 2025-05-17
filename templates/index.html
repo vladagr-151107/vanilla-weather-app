@@ -23,11 +23,17 @@
     <div class="container">
       <div class="weather-app-wrapper">
         <div class="buttons-group">
-          <a href="/register" class="btn btn-outline-primary">Sign up</a>
-          <a href="/login" class="btn btn-outline-secondary ml-2">Sign in</a>
-          <button id="toggle-theme" class="btn btn-outline-secondary">Dark Mode</button>
-          <button id="clear-history" class="btn btn-outline-secondary">Clean the history</button>
-        </div>
+  {% if username %}
+    <span class="welcome" style="font-size: 18px; font-weight: 500; margin-right: 10px; display: flex; align-items: center;">Hi, {{ username }}!</span>
+    <a href="/logout" class="btn btn-outline-secondary ml-2">Exit</a>
+  {% else %}
+    <a href="/register" class="btn btn-outline-primary">Sign up</a>
+    <a href="/login" class="btn btn-outline-secondary ml-2">Sign in</a>
+  {% endif %}
+  
+  <button id="toggle-theme" class="btn btn-outline-secondary">Dark Mode</button>
+  <button id="clear-history" class="btn btn-outline-secondary">Clean the history</button>
+</div>
         <div id="error-message" style="color: red; display:none; font-size: 14px; margin-top: 5px;">We couldn't download the weather. Try again later.</div>
         <div class="weather-app">
           <form id="search-form" class="mb-3">
@@ -83,6 +89,7 @@
           <div class="weather-forecast" id="forecast"></div>
         </div>
         <div class="footer">
+          <small>
           <a
             href="https://github.com/vladagr-151107/vanilla-weather-app"
             target="_blank"
