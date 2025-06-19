@@ -13,10 +13,12 @@ app.secret_key = os.getenv("SECRET_KEY")
 
 db.init_app(app)
 
+
 @app.route("/")
 def home():
     username = session.get("username")
-    return render_template("index.html", username = username)
+    return render_template("index.html", username=username)
+
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -36,6 +38,7 @@ def register():
         return redirect(url_for("add_favourites"))
     return render_template("register.html")
 
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -44,14 +47,17 @@ def login():
         user = User.query.filter_by(username=username).first()
         if not user or not check_password_hash(user.password, password):
             return render_template("login.html", error="Wrong username or password")
-        session["username"] = user.username    
+        session["username"] = user.username
         return redirect(url_for("home"))
     return render_template("login.html")
+
 
 @app.route("/logout")
 def logout():
     session.pop("username", None)
     return redirect(url_for("home"))
+
+
 @app.route("/add_favourites", methods=["GET", "POST"])
 def add_favourites():
     if "username" not in session:
@@ -72,6 +78,8 @@ def add_favourites():
 
     favourites = FavouriteCity.query.filter_by(user_id=user.id).all()
     return render_template("add_favourites.html", favourites=favourites)
+
+
 @app.route("/remove_favourite", methods=["POST"])
 def remove_favourite():
     if "username" not in session:
@@ -84,11 +92,8 @@ def remove_favourite():
         db.session.commit()
 
     return redirect(url_for("add_favourites"))
-@app.route("/init_db")
-def init_db():
-    with app.app_context():
-        db.create_all()
-    return "Database created"
+
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
